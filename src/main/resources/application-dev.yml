@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pingwise
+    username: postgres
+    password: postgres
+rsa:
+  public-key: classpath:certs/public.pem
+  private-key: classpath:certs/private.pem

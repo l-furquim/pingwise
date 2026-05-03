@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:16.10
+    container_name: pingwise-postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pingwise
+    restart: unless-stopped
+    shm_size: 128mb
+
+volumes:
+  postgres-data:

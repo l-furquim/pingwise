@@ -1,5 +1,5 @@
 CREATE TABLE plans (
-    id UUID PRIMARY KEY,
+    id VARCHAR(100) PRIMARY KEY,
     name VARCHAR(100),
     max_monitors INT,
     max_users INT,

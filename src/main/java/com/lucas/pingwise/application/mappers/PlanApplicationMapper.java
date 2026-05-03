@@ -1,0 +1,22 @@
+package com.lucas.pingwise.application.mappers;
+
+import com.lucas.pingwise.adapters.in.rest.plan.dto.PlanResponse;
+import com.lucas.pingwise.domain.model.Plan;
+import org.springframework.stereotype.Component;
+
+@Component
+public class PlanApplicationMapper {
+
+    PlanResponse toResponse(
+            Plan plan
+    ) {
+        return new PlanResponse(
+               plan.getName(),
+               plan.getMaxMonitors(),
+               plan.getApiCallsPerDay(),
+               plan.getCheckIntervalSeconds(),
+               plan.getPriceCents()
+        );
+    }
+
+}
