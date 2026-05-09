@@ -1,3 +1,5 @@
+api:
+  version: v1
 spring:
   application:
     name: pingwise

@@ -26,4 +26,8 @@ public class Monitor {
     private LocalDateTime createdAt;
 
 
+    public int daysMonitoring() {
+        return this.createdAt.compareTo(LocalDateTime.now());
+    }
+
 }

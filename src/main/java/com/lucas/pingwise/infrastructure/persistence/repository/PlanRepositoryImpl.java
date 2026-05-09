@@ -7,6 +7,7 @@ import com.lucas.pingwise.infrastructure.persistence.repository.jpa.PlanJpaRepos
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -20,5 +21,13 @@ public class PlanRepositoryImpl implements PlanRepository {
     @Override
     public Optional<Plan> findById(String id) {
         return this.planJpaRepository.findById(id).map(mapper::toDomain);
+    }
+
+    @Override
+    public List<Plan> findAll() {
+       return this.planJpaRepository.findAll()
+               .stream()
+               .map(mapper::toDomain)
+               .toList();
     }
 }

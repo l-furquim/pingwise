@@ -6,6 +6,7 @@ public record TenantResponse(
         String name,
         String slug,
         PlanResponse plan,
+        // TODO: implement missing the usage from the calculation
         String status
 ) {
 }

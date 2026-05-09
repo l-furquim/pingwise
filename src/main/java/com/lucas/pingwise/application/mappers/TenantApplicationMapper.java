@@ -1,12 +1,15 @@
 package com.lucas.pingwise.application.mappers;
 
 import com.lucas.pingwise.adapters.in.rest.plan.dto.CreateTenantRequest;
+import com.lucas.pingwise.adapters.in.rest.tenant.dto.TenantMemberResponse;
 import com.lucas.pingwise.adapters.in.rest.tenant.dto.TenantResponse;
 import com.lucas.pingwise.application.ports.in.tenant.dto.CreateTenantCommand;
 import com.lucas.pingwise.domain.model.Plan;
 import com.lucas.pingwise.domain.model.Tenant;
+import com.lucas.pingwise.domain.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
 
 @RequiredArgsConstructor
 @Component
@@ -34,5 +37,12 @@ public class TenantApplicationMapper {
             tenant.getStatus().getValue()
         );
     };
+
+    public TenantMemberResponse toTenantMembersResponse(User user) {
+       return new TenantMemberResponse(
+              user.getEmail(),
+              user.getEmail()
+       )
+    }
 
 }

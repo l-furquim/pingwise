@@ -9,9 +9,11 @@ import com.lucas.pingwise.application.ports.out.PlanRepository;
 import com.lucas.pingwise.application.ports.out.TenantRepository;
 import com.lucas.pingwise.application.ports.out.UserRepository;
 import com.lucas.pingwise.domain.enums.TenantStatus;
+import com.lucas.pingwise.domain.enums.UserRole;
 import com.lucas.pingwise.domain.exception.PlanNotFoundException;
 import com.lucas.pingwise.domain.exception.UserAlreadyInATenantException;
 import com.lucas.pingwise.domain.model.Tenant;
+import com.lucas.pingwise.domain.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +47,7 @@ public class CreateTenantUseCaseImpl implements CreateTenantUseCase {
 
         final var slug = this.generateSlug(command.name());
 
-        // TODO: Implement the generation of the payment comming from abacatepay
+        // TODO: Implement the generation of the payment coming from abacatepay
         final var tenant = Tenant.builder()
                 .id(UUID.randomUUID())
                 .name(command.name())
@@ -59,6 +61,7 @@ public class CreateTenantUseCaseImpl implements CreateTenantUseCase {
                 .build();
 
         this.tenantRepository.save(tenant);
+        this.addUserToTenant(tenant, currentUser);
 
         return this.tenantApplicationMapper.toResponse(tenant, plan.get());
     }
@@ -68,6 +71,12 @@ public class CreateTenantUseCaseImpl implements CreateTenantUseCase {
                 .toLowerCase()
                 .trim()
                 .replaceAll(" ", "-");
+    }
+
+    private void addUserToTenant(Tenant tenant, User user) {
+        user.setTenantId(tenant.getId());
+        user.setRole(UserRole.ADMIN);
+        userRepository.save(user);
     }
 
 }

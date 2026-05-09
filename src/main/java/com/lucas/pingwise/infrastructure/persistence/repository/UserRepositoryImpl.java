@@ -7,6 +7,7 @@ import com.lucas.pingwise.infrastructure.persistence.repository.jpa.UserJpaRepos
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,6 +19,15 @@ public class UserRepositoryImpl implements UserRepository {
     private final UserPersistenceMapper mapper;
 
     @Override
+    public User save(User user) {
+        final var userEntity = mapper.toEntity(user);
+
+        final var userSaved = this.userJpaRepository.save(userEntity);
+
+        return this.mapper.toDomain(userSaved);
+    }
+
+    @Override
     public Optional<User> findUserByEmail(String email) {
         return this.userJpaRepository.findByEmail(email).map(mapper::toDomain);
     }
@@ -25,5 +35,13 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Optional<User> findUserById(UUID id) {
         return this.userJpaRepository.findById(id).map(mapper::toDomain);
+    }
+
+    @Override
+    public List<User> findUsersByTenantId(UUID tenantId) {
+        return this.userJpaRepository.findAllByTenantId(tenantId)
+                .stream()
+                .map(mapper::toDomain)
+                .toList();
     }
 }

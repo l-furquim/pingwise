@@ -34,9 +34,12 @@ public class AuthUserUseCaseImpl implements AuthUserUseCase {
             throw new UnauthorizedAuth("Email or password invalid");
         }
 
+        final var userRole = user.get().getRole();
+
+
         final var token = this.authenticationPort.generatedToken(
             user.get().getId(),
-            List.of(user.get().getRole().getValue())
+            userRole == null ? null : List.of(userRole.getValue())
         );
 
         return new AuthResponse(

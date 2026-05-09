@@ -21,17 +21,15 @@ public class UserEntity {
     @Id
     private UUID id;
 
-    @NotNull
     private UUID tenantId;
 
     @Email
     private String email;
 
     @NotNull
-    private transient String passwordHash;
+    private String passwordHash;
 
     @Enumerated(EnumType.STRING)
-    @NotNull
     private UserRole role;
 
     private LocalDateTime createdAt;

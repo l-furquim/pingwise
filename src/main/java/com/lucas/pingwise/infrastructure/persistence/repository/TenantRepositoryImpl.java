@@ -19,7 +19,8 @@ public class TenantRepositoryImpl implements TenantRepository {
 
     @Override
     public Tenant save(Tenant tenant) {
-        final var tenantSaved = tenantJpaRepository.save(this.mapper.toEntity(tenant));
+        final var tenantEntity = this.mapper.toEntity(tenant);
+        final var tenantSaved = tenantJpaRepository.save(tenantEntity);
 
         return this.mapper.toDomain(tenantSaved);
     }

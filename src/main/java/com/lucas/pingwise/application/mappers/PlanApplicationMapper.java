@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PlanApplicationMapper {
 
-    PlanResponse toResponse(
+    public PlanResponse toResponse(
             Plan plan
     ) {
         return new PlanResponse(

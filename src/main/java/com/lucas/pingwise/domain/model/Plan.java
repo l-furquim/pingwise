@@ -11,6 +11,7 @@ public class Plan {
 
     private String id;
     private String name;
+    private Integer retentionDays;
     private Integer maxMonitors;
     private Integer apiCallsPerDay;
     private Integer checkIntervalSeconds;

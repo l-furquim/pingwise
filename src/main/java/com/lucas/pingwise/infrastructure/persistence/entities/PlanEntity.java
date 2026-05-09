@@ -23,6 +23,10 @@ public class PlanEntity {
     private String name;
 
     @NotNull
+    private Integer retentionDays;
+
+
+    @NotNull
     private Integer maxMonitors;
 
     @NotNull
