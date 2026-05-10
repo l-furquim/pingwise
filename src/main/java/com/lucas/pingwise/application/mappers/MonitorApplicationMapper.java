@@ -2,6 +2,7 @@ package com.lucas.pingwise.application.mappers;
 
 import com.lucas.pingwise.adapters.in.rest.monitor.dto.CreateMonitorRequest;
 import com.lucas.pingwise.adapters.in.rest.monitor.dto.MonitorResponse;
+import com.lucas.pingwise.adapters.in.rest.monitor.dto.TenantMonitorResponse;
 import com.lucas.pingwise.application.ports.in.monitor.dto.CreateMonitorCommand;
 import com.lucas.pingwise.domain.model.Monitor;
 import com.lucas.pingwise.domain.model.Plan;
@@ -29,6 +30,7 @@ public class MonitorApplicationMapper {
 
    public MonitorResponse toResponse(Monitor monitor, Tenant tenant, Plan plan) {
       return new MonitorResponse(
+              monitor.getId(),
               monitor.getName(),
               monitor.getUrl(),
               monitor.getIntervalSeconds(),
@@ -43,6 +45,21 @@ public class MonitorApplicationMapper {
                     plan
               )
       );
+   }
+
+   public TenantMonitorResponse toResponse(Monitor monitor) {
+       return new TenantMonitorResponse(
+               monitor.getId(),
+               monitor.getName(),
+               monitor.getUrl(),
+               monitor.getIntervalSeconds(),
+               monitor.getTimeoutMs(),
+               monitor.getConsecutiveFailuresThreshold(),
+               monitor.getStatus().getValue(),
+               monitor.isPublic(),
+               monitor.daysMonitoring(),
+               monitor.getCreatedAt()
+       );
    }
 
 }

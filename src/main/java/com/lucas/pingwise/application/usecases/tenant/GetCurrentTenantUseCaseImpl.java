@@ -29,7 +29,7 @@ public class GetCurrentTenantUseCaseImpl implements GetCurrentTenantUseCase {
 
     @Override
     public TenantResponse execute() {
-        final var user = this.authContextPort.getUser();
+       final var user = this.authContextPort.getUser();
 
        final var tenant = this.tenantRepository.findById(user.getTenantId()).get();
        final var plan = this.planRepository.findById(tenant.getPlanId()).get();

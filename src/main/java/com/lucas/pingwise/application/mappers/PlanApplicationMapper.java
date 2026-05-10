@@ -13,6 +13,7 @@ public class PlanApplicationMapper {
         return new PlanResponse(
                plan.getName(),
                plan.getMaxMonitors(),
+               plan.getMaxUsers(),
                plan.getApiCallsPerDay(),
                plan.getCheckIntervalSeconds(),
                plan.getPriceCents()

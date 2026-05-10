@@ -8,7 +8,7 @@ public record CreateTenantRequest(
         @NotBlank
         String name,
         @Pattern(
-                regexp = "^(free|USER|GUEST)$",
+                regexp = "^(free|pro|max|max-20)$",
                 message = "plan id must be, free, pro, max or max-20x"
         )
         String planId

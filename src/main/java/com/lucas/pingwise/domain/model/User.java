@@ -23,4 +23,9 @@ public class User {
 
     private LocalDateTime createdAt;
 
+    public void leaveTenant() {
+        this.tenantId = null;
+        this.role = null;
+    }
+
 }

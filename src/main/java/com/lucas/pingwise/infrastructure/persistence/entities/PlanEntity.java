@@ -25,6 +25,8 @@ public class PlanEntity {
     @NotNull
     private Integer retentionDays;
 
+    @NotNull
+    private Integer maxUsers;
 
     @NotNull
     private Integer maxMonitors;

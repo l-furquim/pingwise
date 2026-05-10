@@ -8,5 +8,8 @@ CREATE TABLE monitors (
     consecutive_failures_threshold INT NOT NULL,
     status VARCHAR(100) NOT NULL,
     is_public BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    UNIQUE(id, name)
+
 );

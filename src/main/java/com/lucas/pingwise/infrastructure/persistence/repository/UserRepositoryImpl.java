@@ -1,6 +1,7 @@
 package com.lucas.pingwise.infrastructure.persistence.repository;
 
 import com.lucas.pingwise.application.ports.out.UserRepository;
+import com.lucas.pingwise.domain.enums.UserRole;
 import com.lucas.pingwise.domain.model.User;
 import com.lucas.pingwise.infrastructure.persistence.mapper.UserPersistenceMapper;
 import com.lucas.pingwise.infrastructure.persistence.repository.jpa.UserJpaRepository;
@@ -43,5 +44,21 @@ public class UserRepositoryImpl implements UserRepository {
                 .stream()
                 .map(mapper::toDomain)
                 .toList();
+    }
+
+    @Override
+    public long countTenantMembers(UUID tenantId) {
+        return  this.userJpaRepository.countByTenantId(tenantId);
+    }
+
+    @Override
+    public boolean existsByEmailAndTenantId(String email, UUID tenantId) {
+        return this.userJpaRepository.existsByEmailAndTenantId(email, tenantId);
+    }
+
+    @Override
+    public List<User> findAdminsByTenantIdAndIdIsNot(UUID tenantId, UUID id) {
+        return this.userJpaRepository.findByTenantIdAndIdIsNotAndRoleEquals(tenantId, id, UserRole.ADMIN)
+                .stream().map(mapper::toDomain).toList();
     }
 }

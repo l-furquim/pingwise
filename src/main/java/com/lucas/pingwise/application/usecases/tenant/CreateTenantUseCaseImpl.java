@@ -46,8 +46,14 @@ public class CreateTenantUseCaseImpl implements CreateTenantUseCase {
         }
 
         final var slug = this.generateSlug(command.name());
+        var status = TenantStatus.ACTIVE;
 
-        // TODO: Implement the generation of the payment coming from abacatepay
+        if (plan.get().needsPayment()) {
+            // TODO: Implement the generation of the payment coming from abacatepay
+            status = TenantStatus.WAITING_PAYMENT;
+        }
+
+
         final var tenant = Tenant.builder()
                 .id(UUID.randomUUID())
                 .name(command.name())
@@ -57,7 +63,7 @@ public class CreateTenantUseCaseImpl implements CreateTenantUseCase {
                 .planId(plan.get().getId())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
-                .status(TenantStatus.WAITING_PAYMENT)
+                .status(status)
                 .build();
 
         this.tenantRepository.save(tenant);

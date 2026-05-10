@@ -12,5 +12,8 @@ public interface UserRepository {
     Optional<User> findUserByEmail(String email);
     Optional<User> findUserById(UUID id);
     List<User> findUsersByTenantId(UUID tenantId);
+    long countTenantMembers(UUID tenantId);
+    boolean existsByEmailAndTenantId(String email, UUID tenantId);
+    List<User> findAdminsByTenantIdAndIdIsNot(UUID tenantId, UUID id);
 
 }

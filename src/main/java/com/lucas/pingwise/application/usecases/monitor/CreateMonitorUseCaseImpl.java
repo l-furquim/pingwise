@@ -11,6 +11,7 @@ import com.lucas.pingwise.application.ports.out.TenantRepository;
 import com.lucas.pingwise.domain.enums.MonitorStatus;
 import com.lucas.pingwise.domain.exception.InvalidMonitorCreationException;
 import com.lucas.pingwise.domain.exception.PlanLimitException;
+import com.lucas.pingwise.domain.exception.TenantNotEligibleException;
 import com.lucas.pingwise.domain.model.Monitor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,10 +33,14 @@ public class CreateMonitorUseCaseImpl implements CreateMonitorUseCase {
     @Override
     public MonitorResponse execute(CreateMonitorCommand command) {
         final var user = authContextPort.getUser();
-        final var tenant = this.tenantRepository.findById(user.getId()).orElseThrow();
+        final var tenant = this.tenantRepository.findById(user.getTenantId()).orElseThrow();
         final var plan = this.planRepository.findById(tenant.getPlanId()).orElseThrow();
 
         final var previousMonitors = this.repository.findByTenantId(tenant.getId()).size();
+
+        if (!tenant.isEligible()) {
+           throw new TenantNotEligibleException("Tenant not eligible");
+        }
 
         if (plan.getMaxMonitors() != -1 && plan.getMaxMonitors() == previousMonitors) {
            throw new PlanLimitException("Maximum numbers of monitor achieved for this plan.");
@@ -46,11 +51,7 @@ public class CreateMonitorUseCaseImpl implements CreateMonitorUseCase {
         }
 
         if (command.timeoutMs() < 10000 || command.timeoutMs() > 29000) {
-            throw new InvalidMonitorCreationException("Timeout must be lower than 1s and greater than 29s.");
-        }
-
-        if (command.intervalSeconds() * 1000 > command.timeoutMs()) {
-           throw new InvalidMonitorCreationException("Invalid interval time to the corresponding timeout time.");
+            throw new InvalidMonitorCreationException("Timeout must be greater or equals than 1s and lower than 29s.");
         }
 
         if (command.consecutiveFailuresThreshold() < 1 || command.consecutiveFailuresThreshold() > 10) {
@@ -59,6 +60,7 @@ public class CreateMonitorUseCaseImpl implements CreateMonitorUseCase {
 
         final var monitor = Monitor.builder()
                 .id(UUID.randomUUID())
+                .name(command.name())
                 .intervalSeconds(command.intervalSeconds())
                 .consecutiveFailuresThreshold(command.consecutiveFailuresThreshold())
                 .timeoutMs(command.timeoutMs())

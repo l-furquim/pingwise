@@ -23,4 +23,8 @@ public class Tenant {
     private LocalDateTime updatedAt;
     private LocalDateTime createdAt;
 
+    public boolean isEligible() {
+        return this.status.equals(TenantStatus.ACTIVE);
+    }
+
 }
