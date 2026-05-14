@@ -13,6 +13,8 @@ public record TenantMonitorResponse(
         String status,
         boolean isPublic,
         int daysMonitoring,
-        LocalDateTime createdAt
+        LocalDateTime createdAt,
+        LocalDateTime dispatchedAt,
+        LocalDateTime nextCheckAt
 ) {
 }

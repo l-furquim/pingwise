@@ -16,6 +16,8 @@ public record MonitorResponse(
         boolean isPublic,
         int daysMonitoring,
         LocalDateTime createdAt,
+        LocalDateTime dispatchedAt,
+        LocalDateTime nextCheckAt,
         TenantResponse tenant
 ) {
 }

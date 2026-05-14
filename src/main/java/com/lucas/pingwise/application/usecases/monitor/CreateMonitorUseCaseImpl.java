@@ -65,9 +65,12 @@ public class CreateMonitorUseCaseImpl implements CreateMonitorUseCase {
                 .consecutiveFailuresThreshold(command.consecutiveFailuresThreshold())
                 .timeoutMs(command.timeoutMs())
                 .isPublic(command.allowPublicAccess())
-                .status(MonitorStatus.PENDING)
+                .status(MonitorStatus.ACTIVE)
                 .createdAt(LocalDateTime.now())
                 .tenantId(tenant.getId())
+                .dispatchedAt(null)
+                // Put next check to be directly in the queue
+                .nextCheckAt(LocalDateTime.now())
                 .url(command.url())
                 .build();
 

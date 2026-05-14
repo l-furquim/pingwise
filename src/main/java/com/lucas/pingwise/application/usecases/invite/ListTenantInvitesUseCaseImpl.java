@@ -2,7 +2,7 @@ package com.lucas.pingwise.application.usecases.invite;
 
 import com.lucas.pingwise.adapters.in.rest.invite.dto.InviteResponse;
 import com.lucas.pingwise.application.mappers.InviteApplicationMapper;
-import com.lucas.pingwise.application.ports.invite.ListTenantInvitesUseCase;
+import com.lucas.pingwise.application.ports.in.invite.ListTenantInvitesUseCase;
 import com.lucas.pingwise.application.ports.out.AuthContextPort;
 import com.lucas.pingwise.application.ports.out.InviteRepository;
 import com.lucas.pingwise.domain.enums.InviteStatus;

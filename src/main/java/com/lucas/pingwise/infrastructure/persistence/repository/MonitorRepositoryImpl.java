@@ -38,4 +38,11 @@ public class MonitorRepositoryImpl implements MonitorRepository {
                 .stream().map(monitorPersistenceMapper::toDomain)
                 .toList();
     }
+
+    @Override
+    public List<Monitor> findDueMonitors(int offset, int limit) {
+        return this.monitorJpaRepository.findDueMonitors(offset, limit)
+                .stream().map(monitorPersistenceMapper::toDomain)
+                .toList();
+    }
 }

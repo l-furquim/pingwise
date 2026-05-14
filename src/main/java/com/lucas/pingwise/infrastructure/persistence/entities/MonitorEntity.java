@@ -32,6 +32,10 @@ public class MonitorEntity {
     @NotNull
     private Integer intervalSeconds;
 
+    private LocalDateTime nextCheckAt;
+
+    private LocalDateTime dispatchedAt;
+
     @NotNull
     private Integer timeoutMs;
 

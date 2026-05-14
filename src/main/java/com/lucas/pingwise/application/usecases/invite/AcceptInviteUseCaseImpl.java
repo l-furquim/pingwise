@@ -1,6 +1,6 @@
 package com.lucas.pingwise.application.usecases.invite;
 
-import com.lucas.pingwise.application.ports.invite.AcceptInviteUseCase;
+import com.lucas.pingwise.application.ports.in.invite.AcceptInviteUseCase;
 import com.lucas.pingwise.application.ports.out.InviteRepository;
 import com.lucas.pingwise.application.ports.out.TokenPort;
 import com.lucas.pingwise.application.ports.out.UserRepository;

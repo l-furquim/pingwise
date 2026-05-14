@@ -1,8 +1,8 @@
 package com.lucas.pingwise.adapters.in.rest.invite;
 
 import com.lucas.pingwise.adapters.in.rest.invite.dto.InviteResponse;
-import com.lucas.pingwise.application.ports.invite.AcceptInviteUseCase;
-import com.lucas.pingwise.application.ports.invite.ListTenantInvitesUseCase;
+import com.lucas.pingwise.application.ports.in.invite.AcceptInviteUseCase;
+import com.lucas.pingwise.application.ports.in.invite.ListTenantInvitesUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

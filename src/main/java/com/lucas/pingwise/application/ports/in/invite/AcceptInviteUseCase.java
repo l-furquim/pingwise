@@ -1,4 +1,4 @@
-package com.lucas.pingwise.application.ports.invite;
+package com.lucas.pingwise.application.ports.in.invite;
 
 public interface AcceptInviteUseCase {
 

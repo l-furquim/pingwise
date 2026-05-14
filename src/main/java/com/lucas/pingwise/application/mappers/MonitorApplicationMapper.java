@@ -40,6 +40,8 @@ public class MonitorApplicationMapper {
               monitor.isPublic(),
               monitor.daysMonitoring(),
               monitor.getCreatedAt(),
+              monitor.getDispatchedAt(),
+              monitor.getNextCheckAt(),
               this.tenantApplicationMapper.toResponse(
                     tenant,
                     plan
@@ -58,7 +60,9 @@ public class MonitorApplicationMapper {
                monitor.getStatus().getValue(),
                monitor.isPublic(),
                monitor.daysMonitoring(),
-               monitor.getCreatedAt()
+               monitor.getCreatedAt(),
+               monitor.getDispatchedAt(),
+               monitor.getNextCheckAt()
        );
    }
 

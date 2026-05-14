@@ -1,4 +1,9 @@
 spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbit
+    password: rabbit
   datasource:
     url: jdbc:postgresql://localhost:5432/pingwise
     username: postgres
@@ -6,3 +11,11 @@ spring:
 rsa:
   public-key: classpath:certs/public.pem
   private-key: classpath:certs/private.pem
+
+rabbit:
+  check:
+    exchange: "checks.exchange"
+    queue: "checks.queue"
+    dead_queue: "checks.dead.queue"
+    dead_exchange: "checks.dlx"
+    dead_routing: "checks.read"

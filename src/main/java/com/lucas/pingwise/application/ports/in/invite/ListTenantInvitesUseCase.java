@@ -1,4 +1,4 @@
-package com.lucas.pingwise.application.ports.invite;
+package com.lucas.pingwise.application.ports.in.invite;
 
 import com.lucas.pingwise.adapters.in.rest.invite.dto.InviteResponse;
 

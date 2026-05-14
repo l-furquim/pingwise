@@ -13,5 +13,17 @@ services:
     restart: unless-stopped
     shm_size: 128mb
 
+  rabbit:
+    image: rabbitmq:3-management-alpine
+    container_name: pingwise-rabbit
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbit
+      - RABBITMQ_DEFAULT_PASS=rabbit
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
 volumes:
   postgres-data:
+  rabbitmq_data:
