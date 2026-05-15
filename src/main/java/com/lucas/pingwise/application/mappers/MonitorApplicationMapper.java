@@ -4,7 +4,10 @@ import com.lucas.pingwise.adapters.in.rest.monitor.dto.CreateMonitorRequest;
 import com.lucas.pingwise.adapters.in.rest.monitor.dto.MonitorResponse;
 import com.lucas.pingwise.adapters.in.rest.monitor.dto.TenantMonitorResponse;
 import com.lucas.pingwise.application.ports.in.monitor.dto.CreateMonitorCommand;
+import com.lucas.pingwise.application.ports.in.monitor.dto.UpdateMonitorStatusCommand;
+import com.lucas.pingwise.domain.enums.MonitorStatus;
 import com.lucas.pingwise.domain.model.Monitor;
+import com.lucas.pingwise.domain.model.MonitorUpdate;
 import com.lucas.pingwise.domain.model.Plan;
 import com.lucas.pingwise.domain.model.Tenant;
 import lombok.RequiredArgsConstructor;
@@ -63,6 +66,13 @@ public class MonitorApplicationMapper {
                monitor.getCreatedAt(),
                monitor.getDispatchedAt(),
                monitor.getNextCheckAt()
+       );
+   }
+
+   public UpdateMonitorStatusCommand toCommand(MonitorUpdate monitorUpdate) {
+       return new UpdateMonitorStatusCommand(
+               monitorUpdate.monitorId(),
+               MonitorStatus.valueOf(monitorUpdate.status())
        );
    }
 

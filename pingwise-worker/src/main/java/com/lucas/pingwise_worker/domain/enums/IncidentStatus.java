@@ -1,4 +1,4 @@
-package com.lucas.pingwise.domain.enums;
+package com.lucas.pingwise_worker.domain.enums;
 
 import lombok.Getter;
 

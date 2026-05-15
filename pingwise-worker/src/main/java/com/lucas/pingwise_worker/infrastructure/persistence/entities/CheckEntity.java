@@ -1,4 +1,4 @@
-package com.lucas.pingwise.infrastructure.persistence.entities;
+package com.lucas.pingwise_worker.infrastructure.persistence.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

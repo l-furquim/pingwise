@@ -1,4 +1,4 @@
-package com.lucas.pingwise.infrastructure.notification;
+package com.lucas.pingwise.adapters.out.messaging;
 
 import com.lucas.pingwise.application.ports.out.ProducerPort;
 import com.lucas.pingwise.domain.model.CheckJob;

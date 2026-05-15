@@ -14,8 +14,18 @@ rsa:
 
 rabbit:
   check:
-    exchange: "checks.exchange"
-    queue: "checks.queue"
-    dead_queue: "checks.dead.queue"
-    dead_exchange: "checks.dlx"
-    dead_routing: "checks.read"
+    queue: pingwise.check.queue
+    exchange: pingwise.check.exchange
+    routing: pingwise.check.routing
+    dead_queue: pingwise.check.dead.queue
+    dead_exchange: pingwise.check.dead.exchange
+    dead_routing: pingwise.check.dead.routing
+
+  monitor:
+    update:
+      queue: pingwise.monitor.update.queue
+      exchange: pingwise.monitor.update.exchange
+      routing: pingwise.monitor.update.routing
+      dead_queue: pingwise.monitor.update.dead.queue
+      dead_exchange: pingwise.monitor.update.dead.exchange
+      dead_routing: pingwise.monitor.update.dead.routing

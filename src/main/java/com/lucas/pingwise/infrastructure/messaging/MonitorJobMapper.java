@@ -13,6 +13,7 @@ public class MonitorJobMapper {
                monitor.getTenantId(),
                monitor.getName(),
                monitor.getUrl(),
+               monitor.getTimeoutMs(),
                monitor.getConsecutiveFailuresThreshold()
         );
     }

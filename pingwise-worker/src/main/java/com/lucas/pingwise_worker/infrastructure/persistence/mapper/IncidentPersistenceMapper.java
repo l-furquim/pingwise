@@ -1,7 +1,7 @@
-package com.lucas.pingwise.infrastructure.persistence.mapper;
+package com.lucas.pingwise_worker.infrastructure.persistence.mapper;
 
-import com.lucas.pingwise.domain.model.Incident;
-import com.lucas.pingwise.infrastructure.persistence.entities.IncidentEntity;
+import com.lucas.pingwise_worker.domain.model.Incident;
+import com.lucas.pingwise_worker.infrastructure.persistence.entities.IncidentEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 

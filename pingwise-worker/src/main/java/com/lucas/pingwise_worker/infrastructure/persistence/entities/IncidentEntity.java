@@ -1,6 +1,6 @@
-package com.lucas.pingwise.infrastructure.persistence.entities;
+package com.lucas.pingwise_worker.infrastructure.persistence.entities;
 
-import com.lucas.pingwise.domain.enums.IncidentStatus;
+import com.lucas.pingwise_worker.domain.enums.IncidentStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

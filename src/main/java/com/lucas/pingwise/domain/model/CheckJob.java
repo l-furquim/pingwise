@@ -8,6 +8,7 @@ public record CheckJob (
     UUID tenantId,
     String name,
     String url,
+    Integer timeoutMs,
     Integer consecutiveFailuresThreshold
 ) implements Serializable {
 }

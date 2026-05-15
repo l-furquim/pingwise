@@ -1,4 +1,4 @@
-package com.lucas.pingwise.domain.model;
+package com.lucas.pingwise_worker.domain.model;
 
 import lombok.*;
 

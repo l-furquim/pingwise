@@ -1,6 +1,6 @@
-package com.lucas.pingwise.infrastructure.persistence.repository.jpa;
+package com.lucas.pingwise_worker.infrastructure.persistence.repository.jpa;
 
-import com.lucas.pingwise.infrastructure.persistence.entities.CheckEntity;
+import com.lucas.pingwise_worker.infrastructure.persistence.entities.CheckEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
