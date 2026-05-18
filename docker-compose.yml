@@ -24,6 +24,16 @@ services:
       - "15672:15672"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
+  redis:
+    image: redis:8.8-m03-alpine3.23
+    container_name: pingwise-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass redis --appendonly yes
+    volumes:
+      - redis_data:/data
 volumes:
   postgres-data:
   rabbitmq_data:
+  redis_data:

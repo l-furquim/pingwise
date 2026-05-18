@@ -20,11 +20,14 @@ public class RabbitProducerAdapter implements ProducerPort {
     @Value("${rabbit.check.exchange}")
     public String exchange;
 
+    @Value("${rabbit.check.routing}")
+    private String routingKey;
+
     @Override
     public void sendCheckMessageProducer(CheckJob checkJob) {
         try {
             log.info("Sending check message for monitor={}",  checkJob.monitorId());
-           this.rabbitTemplate.convertAndSend(this.exchange, checkJob);
+           this.rabbitTemplate.convertAndSend(this.exchange, this.routingKey, checkJob);
         } catch (Exception e) {
             log.error("Error while sending check message producer to RabbitMQ.", e);
             throw new RuntimeException(e);

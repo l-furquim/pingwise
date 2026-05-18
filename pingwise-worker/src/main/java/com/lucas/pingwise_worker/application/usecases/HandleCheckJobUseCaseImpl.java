@@ -31,10 +31,7 @@ public class HandleCheckJobUseCaseImpl implements HandleCheckJobUseCase {
 
     private final TimingInterceptor timingInterceptor;
 
-    private final RestClient restClient = RestClient.builder()
-            .requestInterceptor(this.timingInterceptor)
-            .build();
-
+    private final RestClient restClient;
     private final CheckRepository checkRepository;
     private final IncidentRepository incidentRepository;
 

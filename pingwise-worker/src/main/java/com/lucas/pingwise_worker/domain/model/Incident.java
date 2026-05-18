@@ -26,6 +26,7 @@ public class Incident {
                 .id(UUID.randomUUID())
                 .startedAt(Instant.now())
                 .status(IncidentStatus.OPEN)
+                .downtimeSeconds(0)
                 .monitorId(monitorId)
                 .build();
     }

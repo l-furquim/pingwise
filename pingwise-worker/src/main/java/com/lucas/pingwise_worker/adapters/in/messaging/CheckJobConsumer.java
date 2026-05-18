@@ -16,7 +16,7 @@ public class CheckJobConsumer {
     private final HandleCheckJobUseCase handleCheckJobUseCase;
     private final CheckJobMapper checkJobMapper;
 
-    @RabbitListener(queues = "checks.queue")
+    @RabbitListener(queues = "pingwise.check.queue")
     public void consume(
             CheckJob message
     ) {

@@ -15,13 +15,16 @@ public class RabbitMonitorProducerAdapter implements MonitorProducerPort {
 
     private final RabbitTemplate rabbitTemplate;
 
+    @Value("${rabbit.monitor.update.exchange}")
+    private String monitorUpdateExchange;
+
     @Value("${rabbit.monitor.update.routing}")
     private String monitorUpdateRouting;
 
     @Override
     public void sendMonitorUpdate(MonitorUpdate monitorUpdate) {
         try {
-            rabbitTemplate.convertAndSend(monitorUpdateRouting,  monitorUpdate);
+            rabbitTemplate.convertAndSend(monitorUpdateExchange, monitorUpdateRouting, monitorUpdate);
         } catch (Exception e) {
             log.error("Error while sending monitor update", e);
         }

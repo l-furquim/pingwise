@@ -1,3 +1,5 @@
+server:
+  port: 8081
 spring:
   data:
     redis:
@@ -15,4 +17,8 @@ spring:
     password: postgres
 rabbit:
   checks:
-    queue: "checks.queue"
+    queue: "pingwise.check.queue"
+  monitor:
+    update:
+      exchange: "pingwise.monitor.update.exchange"
+      routing: "pingwise.monitor.update.routing"
