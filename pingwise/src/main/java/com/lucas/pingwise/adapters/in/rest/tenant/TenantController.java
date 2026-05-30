@@ -1,10 +1,10 @@
 package com.lucas.pingwise.adapters.in.rest.tenant;
 
 import com.lucas.pingwise.adapters.in.rest.plan.dto.CreateTenantRequest;
-import com.lucas.pingwise.adapters.in.rest.tenant.dto.InviteTenantMemberRequest;
-import com.lucas.pingwise.adapters.in.rest.tenant.dto.TenantMemberResponse;
-import com.lucas.pingwise.adapters.in.rest.tenant.dto.TenantResponse;
+import com.lucas.pingwise.adapters.in.rest.tenant.dto.*;
 import com.lucas.pingwise.application.mappers.TenantApplicationMapper;
+import com.lucas.pingwise.application.ports.in.monitor.GetMonitorChecksUseCase;
+import com.lucas.pingwise.application.ports.in.monitor.GetMonitorIncidentsUseCase;
 import com.lucas.pingwise.application.ports.in.tenant.*;
 import com.lucas.pingwise.infrastructure.security.TenantMemberOnly;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +27,9 @@ public class TenantController {
    private final InviteTenantMemberUseCase inviteTenantMemberUseCase;
    private final LeaveTenantUseCase leaveTenantUseCase;
    private final RemoveMemberUseCase removeMemberUseCase;
+   private final GetTenantUsageUseCase getTenantUsageUseCase;
+   private final GetMonitorChecksUseCase getMonitorChecksUseCase;
+   private final GetMonitorIncidentsUseCase getMonitorIncidentsUseCase;
 
    private final TenantApplicationMapper tenantApplicationMapper;
 
@@ -81,6 +84,37 @@ public class TenantController {
    public ResponseEntity<Void> removeMember(@PathVariable("id") UUID memberId) {
         this.removeMemberUseCase.execute(memberId);
         return ResponseEntity.ok().build();
+   }
+
+   @TenantMemberOnly
+   @GetMapping("/usage")
+   public ResponseEntity<DetailedUsageResponse> getUsage() {
+        final var response = this.getTenantUsageUseCase.execute();
+
+        return ResponseEntity.ok(response);
+   }
+
+   @PreAuthorize("hasRole('ADMIN')")
+   @TenantMemberOnly
+   public ResponseEntity<Void> getInvoices() {
+       // TODO: Implement
+       return ResponseEntity.ok().build();
+   }
+
+   @TenantMemberOnly
+   @RequestMapping("/monitors/{monitorId}/checks")
+   public ResponseEntity<List<CheckResponse>> getMonitorChecks(@PathVariable("monitorId") UUID monitorId) {
+        final var response = getMonitorChecksUseCase.execute(this.tenantApplicationMapper.toCommand(monitorId));
+
+        return ResponseEntity.ok(response);
+   }
+
+   @TenantMemberOnly
+   @RequestMapping("/monitors/{monitorId}/incidents")
+   public ResponseEntity<List<IncidentResponse>> getMonitorIncidents(@PathVariable("monitorId") UUID monitorId) {
+       final var response = getMonitorIncidentsUseCase.execute(this.tenantApplicationMapper.toIncidentsCommand(monitorId));
+
+       return ResponseEntity.ok(response);
    }
 
 }

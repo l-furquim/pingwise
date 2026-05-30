@@ -6,6 +6,6 @@ import java.util.UUID;
 public interface AuthenticationPort {
 
     boolean isValid(String token);
-    String generatedToken(UUID userId, List<String> roles);
+    String generatedToken(UUID userId, UUID tenant, String planId, List<String> roles);
 
 }

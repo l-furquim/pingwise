@@ -6,10 +6,7 @@ import com.lucas.pingwise.adapters.in.rest.monitor.dto.TenantMonitorResponse;
 import com.lucas.pingwise.application.ports.in.monitor.dto.CreateMonitorCommand;
 import com.lucas.pingwise.application.ports.in.monitor.dto.UpdateMonitorStatusCommand;
 import com.lucas.pingwise.domain.enums.MonitorStatus;
-import com.lucas.pingwise.domain.model.Monitor;
-import com.lucas.pingwise.domain.model.MonitorUpdate;
-import com.lucas.pingwise.domain.model.Plan;
-import com.lucas.pingwise.domain.model.Tenant;
+import com.lucas.pingwise.domain.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +28,7 @@ public class MonitorApplicationMapper {
        );
    }
 
-   public MonitorResponse toResponse(Monitor monitor, Tenant tenant, Plan plan) {
+   public MonitorResponse toResponse(Monitor monitor, Tenant tenant, Plan plan, Usage usage) {
       return new MonitorResponse(
               monitor.getId(),
               monitor.getName(),
@@ -47,6 +44,7 @@ public class MonitorApplicationMapper {
               monitor.getNextCheckAt(),
               this.tenantApplicationMapper.toResponse(
                     tenant,
+                    usage,
                     plan
               )
       );

@@ -11,7 +11,7 @@ import com.lucas.pingwise.domain.model.EmailMessage;
 import com.lucas.pingwise.domain.model.Invite;
 import com.lucas.pingwise.domain.model.Plan;
 import com.lucas.pingwise.domain.model.Tenant;
-import com.lucas.pingwise.domain.service.MemberLimitPolicy;
+import com.lucas.pingwise.domain.service.PlanUsagePolicy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,6 @@ public class InviteTenantMemberUseCaseImpl implements InviteTenantMemberUseCase 
     private final EmailSenderPort emailSender;
     private final TokenPort tokenPort;
     private final AuthContextPort authContextPort;
-    private final MemberLimitPolicy memberLimitPolicy;
 
     @Override
     public void execute(InviteTenantMemberCommand command) {
@@ -77,7 +76,7 @@ public class InviteTenantMemberUseCaseImpl implements InviteTenantMemberUseCase 
 
     private void validateMemberLimit(Tenant tenant, Plan plan) {
         long currentCount = userRepository.countTenantMembers(tenant.getId());
-        memberLimitPolicy.validate(currentCount, plan.getMaxUsers());
+        PlanUsagePolicy.validateMemberLimit(currentCount, plan.getMaxUsers());
     }
 
 }

@@ -13,6 +13,7 @@ import com.lucas.pingwise.domain.enums.UserRole;
 import com.lucas.pingwise.domain.exception.PlanNotFoundException;
 import com.lucas.pingwise.domain.exception.UserAlreadyInATenantException;
 import com.lucas.pingwise.domain.model.Tenant;
+import com.lucas.pingwise.domain.model.Usage;
 import com.lucas.pingwise.domain.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -69,7 +70,7 @@ public class CreateTenantUseCaseImpl implements CreateTenantUseCase {
         this.tenantRepository.save(tenant);
         this.addUserToTenant(tenant, currentUser);
 
-        return this.tenantApplicationMapper.toResponse(tenant, plan.get());
+        return this.tenantApplicationMapper.toResponse(tenant, Usage.build() ,plan.get());
     }
 
     private String generateSlug(String name) {

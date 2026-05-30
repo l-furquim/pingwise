@@ -45,4 +45,9 @@ public class MonitorRepositoryImpl implements MonitorRepository {
                 .stream().map(monitorPersistenceMapper::toDomain)
                 .toList();
     }
+
+    @Override
+    public int countTenantMonitors(UUID tenantId) {
+        return this.monitorJpaRepository.countByTenantId(tenantId);
+    }
 }

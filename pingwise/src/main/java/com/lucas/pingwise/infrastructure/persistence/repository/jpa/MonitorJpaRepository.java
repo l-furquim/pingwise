@@ -26,4 +26,7 @@ public interface MonitorJpaRepository extends JpaRepository<MonitorEntity, UUID>
     OFFSET :offset
 """)
     List<MonitorEntity> findDueMonitors(@Param("offset") int offset, @Param("limit") int limit);
+
+    int countByTenantId(UUID tenantId);
+
 }

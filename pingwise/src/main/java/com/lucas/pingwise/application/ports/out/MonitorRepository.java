@@ -12,5 +12,6 @@ public interface MonitorRepository {
     Optional<Monitor> findById(UUID id);
     List<Monitor> findByTenantId(UUID tenantId);
     List<Monitor> findDueMonitors(int offset, int limit);
+    int countTenantMonitors(UUID tenantId);
 
 }

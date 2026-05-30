@@ -27,7 +27,7 @@ public class JwtAuthenticationAdapter implements AuthenticationPort {
     }
 
     @Override
-    public String generatedToken(UUID userId, List<String> roles) {
+    public String generatedToken(UUID userId, UUID tenant, String planId, List<String> roles) {
 
         Instant now = Instant.now();
 
@@ -37,6 +37,8 @@ public class JwtAuthenticationAdapter implements AuthenticationPort {
                 .expiresAt(now.plus(EXPIRES_IN_MINUTES, ChronoUnit.MINUTES))
                 .subject(userId.toString())
                 .claim("roles", roles == null ? List.of() : roles)
+                .claim("tenant", tenant)
+                .claim("plan", planId)
                 .build();
 
         return jwtEncoder.encode(
